@@ -1,0 +1,22 @@
+{
+  "name": "gps-simulator",
+  "version": "1.0.0",
+  "description": "simulates gps position",
+  "private": true,
+  "dependencies": {
+    "sync-request": "^3.0.0"
+  },
+  "scripts": {
+    "prestart": "npm install",
+    "test": "echo \"Error: no test specified\"",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "hp",
+    "demo"
+  ],
+  "author": "hp-demo",
+  "engines": {
+    "node": "4.4.x"
+  }
+}
