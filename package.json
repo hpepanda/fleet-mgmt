@@ -4,7 +4,10 @@
   "description": "simulates gps position",
   "private": true,
   "dependencies": {
-    "sync-request": "^3.0.0"
+    "sync-request": "^3.0.0",
+    "random-longitude": "1.0.1",
+    "random-latitude": "1.0.1",
+    "express": "^4.13.4"
   },
   "scripts": {
     "prestart": "npm install",

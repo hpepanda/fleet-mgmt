@@ -1,0 +1,6 @@
+applications:
+- name: gps-simulator
+  mem: 128M
+  stackato:
+    ignores:
+    - node_modules
