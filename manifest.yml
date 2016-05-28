@@ -1,5 +1,5 @@
 applications:
-- name: gps-simulator
+- name: research-gps-simulator
   mem: 128M
   stackato:
     ignores:

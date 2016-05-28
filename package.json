@@ -7,7 +7,9 @@
     "sync-request": "^3.0.0",
     "random-longitude": "1.0.1",
     "random-latitude": "1.0.1",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "googlemaps": "1.6.0",
+    "polyline": "0.2.0"
   },
   "scripts": {
     "prestart": "npm install",

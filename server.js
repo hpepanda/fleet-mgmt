@@ -39,14 +39,20 @@ if(process.env.APPLY_CF_ENV = true) {
     ip = process.env.CF_INSTANCE_ADDR || ip;
 }
 
-var position = {
+var startPosition = {
+    "lat": randomLatitude({min: bottomRightLat, max: topLeftLat}),
+    "lng": randomLongitude({min: topLeftLong, max: bottomRightLong})
+};
+
+var endPosition = {
     "lat": randomLatitude({min: bottomRightLat, max: topLeftLat}),
     "lng": randomLongitude({min: topLeftLong, max: bottomRightLong})
 };
 
 console.log(JSON.stringify({
     binaryDataServer: binaryDataServer,
-    position: position,
+    startPosition: startPosition,
+    endPosition: endPosition,
     dockerType: dockerType,
     clientId: clientId,
     ip: ip
@@ -62,8 +68,8 @@ var sendRequest = function () {
                 sensorType: "DOCKER",
                 data: [{
                     position: {
-                        longitude: position.lng,
-                        latitude: position.lat
+                        longitude: startPosition.lng,
+                        latitude: startPosition.lat
                     },
                     metadata: {
                         ip: ip,
@@ -81,7 +87,7 @@ var sendRequest = function () {
     }
 };
 
-setTimeout(sendRequest, 2500);
+//setTimeout(sendRequest, 2500);
 
 
 var express = require('express');
@@ -96,5 +102,15 @@ app.get('/', function(req, res){
         time: new Date()
     }));
 });
+
+var googleRouteSimulator = require("./googleRouteSimulator");
+
+var positionCallback = function(position) {
+    console.log(position);
+};
+
+
+var sim = new googleRouteSimulator(startPosition, endPosition, 1000, positionCallback);
+sim.start();
 
 app.listen(port);
