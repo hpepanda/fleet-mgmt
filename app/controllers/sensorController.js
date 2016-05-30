@@ -5,6 +5,9 @@ var Promise = require('bluebird');
 var dataProcessors = require('../processors/sensorProcessorsFactory');
 mongoose.Promise = Promise;
 
+var use = require('use-import');
+var config = use('config');
+
 var SensorDataModel = mongoose.model('SensorData');
 var CachedDataModel = mongoose.model('CachedData');
 
@@ -44,7 +47,7 @@ var saveSensorData = function(req, res, next){
 
     var data = req.body;
 
-    if(process.env.USE_ONLY_CACHE == "true") {
+    if(config.useOnlyCache == "true") {
         updateCachedSensorPromise(data).then(function () {
             console.log("Cache updated");
             res.sendStatus(201);
