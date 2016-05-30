@@ -1,12 +1,13 @@
 /**
  * Created by ashemyakin on 3/23/2016.
  */
+var guidGenerator = require("./guidGenerator");
 
 var clientType = "DOCKER";
 
-var binaryDataServer = process.env.BINARY_DATA_SERVER || "http://192.168.1.6:8020/telemetry";
+var binaryDataServer = process.env.BINARY_DATA_SERVER || "http://localhost:8020/telemetry";
 var dockerType = process.env.DOCKER_TYPE || "unknown";
-var clientId = process.env.DOCKER_ID ||  "1";
+var clientId = process.env.DOCKER_ID ||  guidGenerator.generateGUID();
 var ip = process.env.IP || "127.0.0.1";
 var port = process.env.PORT || 7011;
 
@@ -58,7 +59,8 @@ console.log(JSON.stringify({
     ip: ip
 }));
 
-var sendRequest = function () {
+
+var positionCallback = function(position) {
     try {
         var request = require('sync-request');
         var response = request('PUT', binaryDataServer, {
@@ -67,10 +69,7 @@ var sendRequest = function () {
                 clientType: clientType,
                 sensorType: "DOCKER",
                 data: [{
-                    position: {
-                        longitude: startPosition.lng,
-                        latitude: startPosition.lat
-                    },
+                    position: position,
                     metadata: {
                         ip: ip,
                         dockerType: dockerType,
@@ -82,20 +81,21 @@ var sendRequest = function () {
         response.getBody('utf8');
     } catch (ex) {
         console.log(ex);
-    } finally {
-        setTimeout(sendRequest, 2500);
     }
+
+    console.log(position);
 };
 
-//setTimeout(sendRequest, 2500);
-
+var googleRouteSimulator = require("./googleRouteSimulator");
+var routeSimulator = new googleRouteSimulator(startPosition, endPosition, 1000, positionCallback);
+routeSimulator.start();
 
 var express = require('express');
 var app = express();
 
 app.get('/', function(req, res){
     res.send(JSON.stringify({
-        position: position,
+        position: routeSimulator.getPosition(),
         dockerType: dockerType,
         clientId: clientId,
         ip: ip,
@@ -103,14 +103,5 @@ app.get('/', function(req, res){
     }));
 });
 
-var googleRouteSimulator = require("./googleRouteSimulator");
-
-var positionCallback = function(position) {
-    console.log(position);
-};
-
-
-var sim = new googleRouteSimulator(startPosition, endPosition, 1000, positionCallback);
-sim.start();
 
 app.listen(port);

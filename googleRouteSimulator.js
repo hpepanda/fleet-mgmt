@@ -68,12 +68,14 @@ GoogleRouteSimulator.prototype.updatePosition = function(){
         if(this.index < this.route.length) {
             var position = {
                 latitude: this.route[this.index][0],
-                longitude: this.route[this.index][1]
+                longitude: this.route[this.index][1],
+                bearing: 0
             };
 
             if (this.previousPosition != null) {
                 position.bearing = calculateBearing(this.previousPosition.latitude, this.previousPosition.longitude, position.latitude, position.longitude);
                 this.positionCallback(position);
+                this.previousPosition = position;
             } else {
                 this.previousPosition = position;
             }
@@ -104,6 +106,18 @@ GoogleRouteSimulator.prototype.updatePosition = function(){
 GoogleRouteSimulator.prototype.start = function() {
     if(!updateInterval) {
         updateInterval = setInterval(this.updatePosition.bind(this), 1000);
+    }
+};
+
+GoogleRouteSimulator.prototype.getPosition = function() {
+    if(!this.previousPosition) {
+        return {
+            latitude: this.startPoint.lat,
+            longitude: this.startPoint.lng,
+            bearing: 0
+        }
+    } else {
+        return this.previousPosition;
     }
 };
 
