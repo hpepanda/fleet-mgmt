@@ -1,0 +1,8 @@
+{
+  "config": "./config/config.js",
+  "router": "./app/router.js",
+  "sensorsController": "./app/controllers/sensorsController.js",
+  "gpsSensor": "./app/database/gpsSensor",
+  "systemStatus": "./app/database/systemStatus",
+  "cors": "./app/components/cors.js"
+}
