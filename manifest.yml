@@ -1,0 +1,6 @@
+applications:
+- name: telemetry-ui
+  mem: 128M
+  stackato:
+    ignores:
+    - node_modules

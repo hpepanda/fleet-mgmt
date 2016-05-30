@@ -1,0 +1,13 @@
+<div class="b-wrap">
+    <div id="map"></div>
+    <div class="b-popup" [ngClass]="{'m-popup_hide': !checkedDocker.clientId}">
+        <div class="b-popup__inner">
+            <ul *ngIf="checkedDocker.clientId">
+                <li>dockerId: {{checkedDocker.data[0].metadata.dockerId}}</li>
+                <li>dockerType: {{checkedDocker.data[0].metadata.dockerType}}</li>
+                <li>Ip: {{checkedDocker.data[0].metadata.ip}}</li>
+            </ul>
+        </div>
+        <div class="b-popup__close" (click)="closePopup()"></div>
+    </div>
+</div>
