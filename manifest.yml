@@ -1,0 +1,9 @@
+applications:
+- name: research-binary-data-server
+  mem: 128M
+  services:
+    research-mongo-db:
+       type: mongodb
+  stackato:
+    ignores:
+    - node_modules

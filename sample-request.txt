@@ -1,0 +1,16 @@
+PUT http://hostname:8010/telemetry
+
+{ "clientId": "board1",
+  "clientType": "URB-E",
+  "sensorType": "GPS",
+  "data":
+   { "position":  { "latitude": { "degree": 49, "minutes": 59.9195, "letter": "N" },
+                    "longitude": { "degree": 36, "minutes": 13.9838, "letter": "E" }},
+     "UTCTime": { "hour": "15", "minutes": "9", "seconds": "48.68" },
+     "posFix": "0",
+     "sattUseForNav": "0",
+     "HDOP": "0",
+     "altitude": "NaN",
+     "isValid": "false",
+     "speed": "NaN",
+     "course": "NaN" } }
