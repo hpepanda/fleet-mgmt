@@ -28,6 +28,7 @@
   },
   "stepsPerSegment": 100,
   "markerIcon": "/src/img/urb-e.png",
+  "markerIconActive": "/src/img/urb-e2.png",
   "googleStreetViewAPIKey": "AIzaSyABn-5EYFeFx05Yj61OqhTn236CvI_3sHk",
   "imageSize": {
     "width": 400,

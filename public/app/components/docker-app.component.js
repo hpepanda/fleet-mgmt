@@ -28,10 +28,13 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                 function DockerAppComponent(_configService) {
                     var _this = this;
                     this._configService = _configService;
-                    this.dockers = [];
-                    this.markers = [];
-                    this.googleStreetViewSrcs = [];
+                    this.dockers = {};
+                    this.markers = {};
+                    this.googleStreetViewSrcs = {};
+                    this.providers = {};
+                    this.providerKeys = [];
                     this.checkedDockerId = -1;
+                    this.dockerKeys = [];
                     this._configService.getConfig().then(function (config) {
                         _this.config = config;
                         _this.getConfigCallback();
@@ -53,47 +56,69 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                         var processedIds = [];
                         data.forEach(function (item) {
                             processedIds.push(item.clientId);
-                            if (!_this.markers[item.clientId] || !_this.markers[item.clientId].map) {
+                            if (!_this.markers['item' + item.clientId]) {
                                 var icon = {
                                     url: _this.config.markerIcon
                                 };
-                                _this.markers[item.clientId] = new google.maps.Marker({
+                                _this.markers['item' + item.clientId] = new google.maps.Marker({
                                     position: new google.maps.LatLng(item.data[0].position.latitude, item.data[0].position.longitude),
                                     map: _this.GMap,
                                     icon: icon
                                 });
-                                _this.markers[item.clientId].addListener('click', function () {
+                                _this.markers['item' + item.clientId].addListener('click', function () {
+                                    if (_this.checkedDockerId > -1) {
+                                        var icon = {
+                                            url: _this.config.markerIcon
+                                        };
+                                        _this.markers['item' + _this.checkedDockerId].setIcon(icon);
+                                    }
                                     _this.checkedDockerId = item.clientId;
+                                    var icon = {
+                                        url: _this.config.markerIconActive
+                                    };
+                                    _this.markers['item' + item.clientId].setIcon(icon);
                                 });
+                                if (!_this.providers[item.data[0].metadata.dockerType]) {
+                                    _this.providers[item.data[0].metadata.dockerType] = 0;
+                                    _this.providerKeys = Object.keys(_this.providers);
+                                }
+                                _this.providers[item.data[0].metadata.dockerType]++;
                             }
-                            else if (item.data[0].position.latitude != _this.markers[item.clientId].getPosition().lat() && item.data[0].position.longitude != _this.markers[item.clientId].getPosition().lng()) {
+                            else if (item.data[0].position.latitude != _this.markers['item' + item.clientId].getPosition().lat() && item.data[0].position.longitude != _this.markers['item' + item.clientId].getPosition().lng()) {
                                 _this.updateGoogleStreetViewSrc(item.clientId, item);
-                                _this.markers[item.clientId].setPosition(new google.maps.LatLng(item.data[0].position.latitude, item.data[0].position.longitude));
+                                _this.markers['item' + item.clientId].setPosition(new google.maps.LatLng(item.data[0].position.latitude, item.data[0].position.longitude));
                             }
-                            if (!_this.dockers[item.clientId]) {
-                                _this.dockers[item.clientId] = {
+                            if (!_this.dockers['item' + item.clientId]) {
+                                _this.dockers['item' + item.clientId] = {
                                     clientId: item.clientId,
                                     ip: item.data[0].metadata.ip,
                                     dockerType: item.data[0].metadata.dockerType,
-                                    bearing: item.data[0].position.bearing,
+                                    bearing: item.data[0].position.bearing
                                 };
+                                _this.updateDockerKeys();
                             }
-                            if (!_this.googleStreetViewSrcs[item.clientId] || _this.dockers[item.clientId].bearing != item.data[0].position.bearing) {
+                            if (!_this.googleStreetViewSrcs['item' + item.clientId] || _this.dockers['item' + item.clientId].bearing != item.data[0].position.bearing) {
                                 _this.updateGoogleStreetViewSrc(item.clientId, item);
                             }
                         });
-                        _this.dockers.forEach(function (dockerItem) {
-                            if (processedIds.indexOf(dockerItem.clientId) == -1) {
-                                _this.markers[dockerItem.clientId].setMap(null);
-                                _this.googleStreetViewSrcs[dockerItem.clientId] = null;
-                                if (dockerItem.clientId == _this.checkedDockerId)
-                                    _this.checkedDockerId = -1;
-                            }
-                        });
+                        if (processedIds.length < _this.dockerKeys.length) {
+                            _this.dockerKeys.forEach(function (dockerKey) {
+                                if (processedIds.indexOf(_this.dockers[dockerKey].clientId) == -1) {
+                                    if (_this.checkedDockerId == _this.dockers[dockerKey].clientId)
+                                        _this.checkedDockerId = -1;
+                                    _this.providers[_this.dockers[dockerKey].dockerType]--;
+                                    delete _this.dockers[dockerKey];
+                                    _this.markers[dockerKey].setMap(null);
+                                    delete _this.markers[dockerKey];
+                                    delete _this.googleStreetViewSrcs[dockerKey];
+                                }
+                            });
+                            _this.updateDockerKeys();
+                        }
                     });
                 };
                 DockerAppComponent.prototype.updateGoogleStreetViewSrc = function (clientId, item) {
-                    this.googleStreetViewSrcs[clientId] = 'https://maps.googleapis.com/maps/api/streetview?size='
+                    this.googleStreetViewSrcs['item' + clientId] = 'https://maps.googleapis.com/maps/api/streetview?size='
                         + this.config.imageSize.width + 'x' + this.config.imageSize.height + '&location='
                         + item.data[0].position.latitude + ','
                         + item.data[0].position.longitude + '&heading='
@@ -102,6 +127,9 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                 };
                 DockerAppComponent.prototype.closePopup = function () {
                     this.checkedDockerId = -1;
+                };
+                DockerAppComponent.prototype.updateDockerKeys = function () {
+                    this.dockerKeys = Object.keys(this.dockers);
                 };
                 DockerAppComponent = __decorate([
                     core_1.Component({

@@ -54,6 +54,19 @@ body {
     opacity: .5;
 }
 
+.b-infowindow {
+    position: absolute;
+    width: 15%;
+    min-width: 300px;
+    right: 0;
+    bottom: 25px;
+    background: #fff;
+    box-sizing: border-box;
+    padding: 20px;
+    box-shadow: 0 0 10px 5px RGBA(0, 0, 0, .5);
+    transition: all ease .3s;
+}
+
 .g-left {
     float: left;
 }
@@ -146,23 +159,6 @@ body {
 }
 .m-brackets_camera2 {
     border-color: #fce72c;
-}
-
-.b-infowindow {
-    width: 92%;
-    height: 93%;
-    margin: 0 9px;
-    position: relative;
-}
-.b-infowindow__panel {
-    position: absolute;
-    width: 100%;
-}
-.m-infowindow__panel_top {
-    top: 0;
-}
-.m-infowindow__panel_bottom {
-    bottom: 0;
 }
 
 .b-infobox {

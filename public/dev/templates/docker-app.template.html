@@ -3,13 +3,19 @@
     <div class="b-popup" [ngClass]="{'m-popup_hide': checkedDockerId < 0}">
         <div class="b-popup__inner">
             <h5>Image</h5><br>
-            <img class="j-street-view" [src]="googleStreetViewSrcs[checkedDockerId]" /><br>
+            <img class="j-street-view" [src]="googleStreetViewSrcs['item' + checkedDockerId]" /><br>
             <ul *ngIf="checkedDockerId >= 0">
-                <li>dockerId: {{dockers[checkedDockerId].clientId}}</li>
-                <li>dockerType: {{dockers[checkedDockerId].dockerType}}</li>
-                <li>Ip: {{dockers[checkedDockerId].ip}}</li>
+                <li>dockerId: {{dockers['item' + checkedDockerId].clientId}}</li>
+                <li>dockerType: {{dockers['item' + checkedDockerId].dockerType}}</li>
+                <li>Ip: {{dockers['item' + checkedDockerId].ip}}</li>
             </ul>
         </div>
         <div class="b-popup__close" (click)="closePopup()"></div>
+    </div>
+    <div class="b-infowindow" *ngIf="providerKeys.length">
+        <h2>Providers:</h2>
+        <ul>
+            <li *ngFor="#key of providerKeys">{{key + ': ' + providers[key]}}</li>
+        </ul>
     </div>
 </div>
