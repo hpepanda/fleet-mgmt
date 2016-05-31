@@ -50,9 +50,10 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                     });
                     this.connection = io(this.config.connections.dataServer.server + ':' + this.config.connections.dataServer.port);
                     this.connection.on('docker', function (data) {
+                        var processedIds = [];
                         data.forEach(function (item) {
-                            //console.log(item);
-                            if (!_this.markers[item.clientId]) {
+                            processedIds.push(item.clientId);
+                            if (!_this.markers[item.clientId] || !_this.markers[item.clientId].map) {
                                 var icon = {
                                     url: _this.config.markerIcon
                                 };
@@ -81,6 +82,14 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                                 _this.updateGoogleStreetViewSrc(item.clientId, item);
                             }
                         });
+                        _this.dockers.forEach(function (dockerItem) {
+                            if (processedIds.indexOf(dockerItem.clientId) == -1) {
+                                _this.markers[dockerItem.clientId].setMap(null);
+                                _this.googleStreetViewSrcs[dockerItem.clientId] = null;
+                                if (dockerItem.clientId == _this.checkedDockerId)
+                                    _this.checkedDockerId = -1;
+                            }
+                        });
                     });
                 };
                 DockerAppComponent.prototype.updateGoogleStreetViewSrc = function (clientId, item) {
@@ -90,7 +99,6 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                         + item.data[0].position.longitude + '&heading='
                         + item.data[0].position.bearing + '&pitch=-0.76&key='
                         + this.config.googleStreetViewAPIKey;
-                    console.log(item.data[0].position.bearing);
                 };
                 DockerAppComponent.prototype.closePopup = function () {
                     this.checkedDockerId = -1;

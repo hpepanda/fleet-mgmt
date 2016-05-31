@@ -43,11 +43,12 @@ export class DockerAppComponent {
 
         this.connection = io(this.config.connections.dataServer.server + ':' + this.config.connections.dataServer.port);
         this.connection.on('docker', (data) => {
+            var processedIds = [];
 
             data.forEach((item) => {
-                //console.log(item);
+                processedIds.push(item.clientId);
 
-                if (!this.markers[item.clientId]) {
+                if (!this.markers[item.clientId] || !this.markers[item.clientId].map) {
                     var icon = {
                         url: this.config.markerIcon
                     };
@@ -61,6 +62,7 @@ export class DockerAppComponent {
                     this.markers[item.clientId].addListener('click', () => {
                         this.checkedDockerId = item.clientId;
                     });
+                    
                 } else if (item.data[0].position.latitude != this.markers[item.clientId].getPosition().lat() && item.data[0].position.longitude != this.markers[item.clientId].getPosition().lng()) {
                     this.updateGoogleStreetViewSrc(item.clientId, item);
                     this.markers[item.clientId].setPosition(new google.maps.LatLng(item.data[0].position.latitude, item.data[0].position.longitude));
@@ -81,6 +83,14 @@ export class DockerAppComponent {
 
             });
 
+            this.dockers.forEach((dockerItem) => {
+                if (processedIds.indexOf(dockerItem.clientId) == -1) {
+                    this.markers[dockerItem.clientId].setMap(null);
+                    this.googleStreetViewSrcs[dockerItem.clientId] = null;
+                    if (dockerItem.clientId == this.checkedDockerId) this.checkedDockerId = -1;
+                }
+            });
+
         });
 
     }
@@ -92,7 +102,6 @@ export class DockerAppComponent {
             + item.data[0].position.longitude + '&heading='
             + item.data[0].position.bearing + '&pitch=-0.76&key='
             + this.config.googleStreetViewAPIKey;
-        console.log(item.data[0].position.bearing);
     }
 
     closePopup(): void {

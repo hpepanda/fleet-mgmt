@@ -2,13 +2,13 @@
     <div id="map"></div>
     <div class="b-popup" [ngClass]="{'m-popup_hide': checkedDockerId < 0}">
         <div class="b-popup__inner">
+            <h5>Image</h5><br>
+            <img class="j-street-view" [src]="googleStreetViewSrcs[checkedDockerId]" /><br>
             <ul *ngIf="checkedDockerId >= 0">
                 <li>dockerId: {{dockers[checkedDockerId].clientId}}</li>
                 <li>dockerType: {{dockers[checkedDockerId].dockerType}}</li>
                 <li>Ip: {{dockers[checkedDockerId].ip}}</li>
             </ul>
-            <h5>Image</h5><br>
-            <img class="j-street-view" [src]="googleStreetViewSrcs[checkedDockerId]" />
         </div>
         <div class="b-popup__close" (click)="closePopup()"></div>
     </div>
