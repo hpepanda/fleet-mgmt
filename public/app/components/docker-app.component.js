@@ -66,13 +66,14 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                                     icon: icon
                                 });
                                 _this.markers['item' + item.clientId].addListener('click', function () {
-                                    if (_this.checkedDockerId > -1) {
+                                    if (_this.markerActive >= 0) {
                                         var icon = {
                                             url: _this.config.markerIcon
                                         };
-                                        _this.markers['item' + _this.checkedDockerId].setIcon(icon);
+                                        _this.markers['item' + _this.markerActive].setIcon(icon);
                                     }
                                     _this.checkedDockerId = item.clientId;
+                                    _this.markerActive = item.clientId;
                                     var icon = {
                                         url: _this.config.markerIconActive
                                     };
@@ -104,8 +105,10 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                         if (processedIds.length < _this.dockerKeys.length) {
                             _this.dockerKeys.forEach(function (dockerKey) {
                                 if (processedIds.indexOf(_this.dockers[dockerKey].clientId) == -1) {
-                                    if (_this.checkedDockerId == _this.dockers[dockerKey].clientId)
+                                    if (_this.checkedDockerId == _this.dockers[dockerKey].clientId) {
                                         _this.checkedDockerId = -1;
+                                        _this.markerActive = -1;
+                                    }
                                     _this.providers[_this.dockers[dockerKey].dockerType]--;
                                     delete _this.dockers[dockerKey];
                                     _this.markers[dockerKey].setMap(null);

@@ -16,6 +16,7 @@ export class DockerAppComponent {
     connection: any;
     dockers: any = {};
     markers: any = {};
+    markerActive: number;
     googleStreetViewSrcs: any = {};
     providers: any = {};
     providerKeys: string[] = [];
@@ -63,14 +64,15 @@ export class DockerAppComponent {
                     });
 
                     this.markers['item' + item.clientId].addListener('click', () => {
-                        if (this.checkedDockerId > -1) {
+                        if (this.markerActive >= 0) {
                             var icon = {
                                 url: this.config.markerIcon
                             };
-                            this.markers['item' + this.checkedDockerId].setIcon(icon);
+                            this.markers['item' + this.markerActive].setIcon(icon);
                         }
 
                         this.checkedDockerId = item.clientId;
+                        this.markerActive = item.clientId;
                         var icon = {
                             url: this.config.markerIconActive
                         };
@@ -108,7 +110,10 @@ export class DockerAppComponent {
 
                 this.dockerKeys.forEach((dockerKey) => {
                     if (processedIds.indexOf(this.dockers[dockerKey].clientId) == -1) {
-                        if (this.checkedDockerId == this.dockers[dockerKey].clientId) this.checkedDockerId = -1;
+                        if (this.checkedDockerId == this.dockers[dockerKey].clientId) {
+                            this.checkedDockerId = -1;
+                            this.markerActive = -1;
+                        }
                         this.providers[this.dockers[dockerKey].dockerType]--;
                         delete this.dockers[dockerKey];
                         this.markers[dockerKey].setMap(null);
