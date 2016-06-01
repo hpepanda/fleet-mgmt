@@ -5,8 +5,8 @@ var guidGenerator = require("./guidGenerator");
 
 var clientType = "DOCKER";
 
-var binaryDataServer = process.env.BINARY_DATA_SERVER || "http://localhost:8020/telemetry";
-var dockerType = process.env.DOCKER_TYPE || "unknown";
+var binaryDataServer = process.env.BINARY_DATA_SERVER || "http://research-binary-data-server.52.35.15.130.nip.io/telemetry";
+var dockerType = process.env.DOCKER_TYPE || "local";
 var clientId = process.env.DOCKER_ID ||  guidGenerator.generateGUID();
 var ip = process.env.IP || "127.0.0.1";
 var port = process.env.PORT || 7011;

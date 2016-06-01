@@ -29,6 +29,44 @@ function GoogleRouteSimulator(startPoint, endPoint, speed, callback) {
     this.calculateRoute();
 }
 
+function distance(lat1, lon1, lat2, lon2) {
+    var radlat1 = Math.PI * lat1/180;
+    var radlat2 = Math.PI * lat2/180;
+    var theta = lon1-lon2;
+    var radtheta = Math.PI * theta/180;
+    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    dist = Math.acos(dist);
+    dist = dist * 180/Math.PI;
+    dist = dist * 60 * 1.1515 * 1.609344 * 1000;
+    return dist
+}
+
+
+function midpoint (lat1, lng1, lat2, lng2) {
+    lat1= deg2rad(lat1);
+    lng1= deg2rad(lng1);
+    lat2= deg2rad(lat2);
+    lng2= deg2rad(lng2);
+
+    dlng = lng2 - lng1;
+    Bx = Math.cos(lat2) * Math.cos(dlng);
+    By = Math.cos(lat2) * Math.sin(dlng);
+    lat3 = Math.atan2( Math.sin(lat1)+Math.sin(lat2),
+        Math.sqrt((Math.cos(lat1)+Bx)*(Math.cos(lat1)+Bx) + By*By ));
+    lng3 = lng1 + Math.atan2(By, (Math.cos(lat1) + Bx));
+
+    var position = [(lat3*180)/Math.PI,
+        (lng3*180)/Math.PI
+    ];
+    console.log(position);
+    return position;
+}
+
+function deg2rad (degrees) {
+    return degrees * Math.PI / 180;
+}
+
+
 var locationReceived = function(err, result) {
     if(err || !result || !result.routes || result.routes.length == 0 || !result.routes[0].overview_polyline || !result.routes[0].overview_polyline.points) {
         setTimeout(this.calculateRoute, 1000);
@@ -36,6 +74,27 @@ var locationReceived = function(err, result) {
     }
 
     this.route = polyline.decode(result.routes[0].overview_polyline.points);
+
+    for (var i =0; i < this.route.length; i++) {
+        var point = this.route[i];
+        var nextPoint = null;
+        if (i < this.route.length - 1) {
+            nextPoint = this.route[i + 1];
+        }
+
+        if(nextPoint) {
+            var distanceToPoint = distance(point[0], point[1], nextPoint[0], nextPoint[1]);
+            console.log(distanceToPoint);
+            if (distanceToPoint > 50) {
+                console.log(point);
+                console.log(nextPoint);
+                var newPoint = midpoint(point[0], point[1], nextPoint[0], nextPoint[1]);
+                this.route.splice(i+1, 0, newPoint);
+                i--;
+                console.log("point inserted");
+            }
+        }
+    }
 
 };
 
@@ -73,8 +132,8 @@ GoogleRouteSimulator.prototype.updatePosition = function(){
             };
 
             if (this.previousPosition != null) {
-                position.bearing = calculateBearing(this.previousPosition.latitude, this.previousPosition.longitude, position.latitude, position.longitude);
-                this.positionCallback(position);
+                this.previousPosition.bearing = calculateBearing(this.previousPosition.latitude, this.previousPosition.longitude, position.latitude, position.longitude);
+                this.positionCallback(this.previousPosition);
                 this.previousPosition = position;
             } else {
                 this.previousPosition = position;
@@ -82,6 +141,7 @@ GoogleRouteSimulator.prototype.updatePosition = function(){
 
             this.index++;
         } else if (this.index >= this.route.length && this.index <  this.route.length * 2) {
+            // reverse route
             var reverseIndex = this.route.length - 1 - (this.index - this.route.length);
 
             var position = {
@@ -91,6 +151,7 @@ GoogleRouteSimulator.prototype.updatePosition = function(){
 
             if (this.previousPosition != null) {
                 position.bearing = calculateBearing(this.previousPosition.latitude, this.previousPosition.longitude, position.latitude, position.longitude);
+                this.positionCallback(this.previousPosition);
                 this.positionCallback(position);
             } else {
                 this.previousPosition = position;
