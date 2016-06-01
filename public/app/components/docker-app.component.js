@@ -33,7 +33,7 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                     this.googleStreetViewSrcs = {};
                     this.providers = {};
                     this.providerKeys = [];
-                    this.checkedDockerId = -1;
+                    this.checkedDockerId = null;
                     this.dockerKeys = [];
                     this._configService.getConfig().then(function (config) {
                         _this.config = config;
@@ -57,8 +57,16 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                         data.forEach(function (item) {
                             processedIds.push(item.clientId);
                             if (!_this.markers['item' + item.clientId]) {
+                                if (!_this.providers[item.data[0].metadata.dockerType]) {
+                                    _this.providers[item.data[0].metadata.dockerType] = {
+                                        num: 0,
+                                        icon: _this.config.markerIcons.shift()
+                                    };
+                                    _this.providerKeys = Object.keys(_this.providers);
+                                }
+                                _this.providers[item.data[0].metadata.dockerType].num++;
                                 var icon = {
-                                    url: _this.config.markerIcon
+                                    url: _this.providers[item.data[0].metadata.dockerType].icon
                                 };
                                 _this.markers['item' + item.clientId] = new google.maps.Marker({
                                     position: new google.maps.LatLng(item.data[0].position.latitude, item.data[0].position.longitude),
@@ -66,9 +74,9 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                                     icon: icon
                                 });
                                 _this.markers['item' + item.clientId].addListener('click', function () {
-                                    if (_this.markerActive >= 0) {
+                                    if (_this.markerActive != null) {
                                         var icon = {
-                                            url: _this.config.markerIcon
+                                            url: _this.providers[_this.dockers['item' + _this.markerActive].dockerType].icon
                                         };
                                         _this.markers['item' + _this.markerActive].setIcon(icon);
                                     }
@@ -79,11 +87,6 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                                     };
                                     _this.markers['item' + item.clientId].setIcon(icon);
                                 });
-                                if (!_this.providers[item.data[0].metadata.dockerType]) {
-                                    _this.providers[item.data[0].metadata.dockerType] = 0;
-                                    _this.providerKeys = Object.keys(_this.providers);
-                                }
-                                _this.providers[item.data[0].metadata.dockerType]++;
                             }
                             else if (item.data[0].position.latitude != _this.markers['item' + item.clientId].getPosition().lat() && item.data[0].position.longitude != _this.markers['item' + item.clientId].getPosition().lng()) {
                                 _this.updateGoogleStreetViewSrc(item.clientId, item);
@@ -106,10 +109,10 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                             _this.dockerKeys.forEach(function (dockerKey) {
                                 if (processedIds.indexOf(_this.dockers[dockerKey].clientId) == -1) {
                                     if (_this.checkedDockerId == _this.dockers[dockerKey].clientId) {
-                                        _this.checkedDockerId = -1;
-                                        _this.markerActive = -1;
+                                        _this.checkedDockerId = null;
+                                        _this.markerActive = null;
                                     }
-                                    _this.providers[_this.dockers[dockerKey].dockerType]--;
+                                    _this.providers[_this.dockers[dockerKey].dockerType].num--;
                                     delete _this.dockers[dockerKey];
                                     _this.markers[dockerKey].setMap(null);
                                     delete _this.markers[dockerKey];
@@ -129,7 +132,7 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                         + this.config.googleStreetViewAPIKey;
                 };
                 DockerAppComponent.prototype.closePopup = function () {
-                    this.checkedDockerId = -1;
+                    this.checkedDockerId = null;
                 };
                 DockerAppComponent.prototype.updateDockerKeys = function () {
                     this.dockerKeys = Object.keys(this.dockers);

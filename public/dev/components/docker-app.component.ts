@@ -16,11 +16,11 @@ export class DockerAppComponent {
     connection: any;
     dockers: any = {};
     markers: any = {};
-    markerActive: number;
+    markerActive: string;
     googleStreetViewSrcs: any = {};
     providers: any = {};
     providerKeys: string[] = [];
-    checkedDockerId: number = -1;
+    checkedDockerId: number = null;
     dockerKeys: string[] = [];
 
     constructor(private _configService: ConfigService) {
@@ -53,8 +53,18 @@ export class DockerAppComponent {
                 processedIds.push(item.clientId);
 
                 if (!this.markers['item' + item.clientId]) {
+
+                    if (!this.providers[item.data[0].metadata.dockerType]) {
+                        this.providers[item.data[0].metadata.dockerType] = {
+                            num: 0,
+                            icon: this.config.markerIcons.shift()
+                        };
+                        this.providerKeys = Object.keys(this.providers);
+                    }
+                    this.providers[item.data[0].metadata.dockerType].num++;
+
                     var icon = {
-                        url: this.config.markerIcon
+                        url: this.providers[item.data[0].metadata.dockerType].icon
                     };
 
                     this.markers['item' + item.clientId] = new google.maps.Marker({
@@ -64,9 +74,9 @@ export class DockerAppComponent {
                     });
 
                     this.markers['item' + item.clientId].addListener('click', () => {
-                        if (this.markerActive >= 0) {
+                        if (this.markerActive != null) {
                             var icon = {
-                                url: this.config.markerIcon
+                                url: this.providers[this.dockers['item' + this.markerActive].dockerType].icon
                             };
                             this.markers['item' + this.markerActive].setIcon(icon);
                         }
@@ -78,12 +88,6 @@ export class DockerAppComponent {
                         };
                         this.markers['item' + item.clientId].setIcon(icon);
                     });
-
-                    if (!this.providers[item.data[0].metadata.dockerType]) {
-                        this.providers[item.data[0].metadata.dockerType] = 0;
-                        this.providerKeys = Object.keys(this.providers);
-                    }
-                    this.providers[item.data[0].metadata.dockerType]++;
                     
                 } else if (item.data[0].position.latitude != this.markers['item' + item.clientId].getPosition().lat() && item.data[0].position.longitude != this.markers['item' + item.clientId].getPosition().lng()) {
                     this.updateGoogleStreetViewSrc(item.clientId, item);
@@ -111,10 +115,10 @@ export class DockerAppComponent {
                 this.dockerKeys.forEach((dockerKey) => {
                     if (processedIds.indexOf(this.dockers[dockerKey].clientId) == -1) {
                         if (this.checkedDockerId == this.dockers[dockerKey].clientId) {
-                            this.checkedDockerId = -1;
-                            this.markerActive = -1;
+                            this.checkedDockerId = null;
+                            this.markerActive = null;
                         }
-                        this.providers[this.dockers[dockerKey].dockerType]--;
+                        this.providers[this.dockers[dockerKey].dockerType].num--;
                         delete this.dockers[dockerKey];
                         this.markers[dockerKey].setMap(null);
                         delete this.markers[dockerKey];
@@ -139,7 +143,7 @@ export class DockerAppComponent {
     }
 
     closePopup(): void {
-        this.checkedDockerId = -1;
+        this.checkedDockerId = null;
     }
 
     updateDockerKeys(): void {

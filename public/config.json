@@ -27,8 +27,14 @@
     "fontFamily": "Lato"
   },
   "stepsPerSegment": 100,
-  "markerIcon": "/src/img/urb-e.png",
-  "markerIconActive": "/src/img/urb-e2.png",
+  "markerIcons": [
+    "/src/img/marker-00d8ff.png",
+    "/src/img/marker-fbe72c.png",
+    "/src/img/marker-00d628.png",
+    "/src/img/marker-bd7400.png",
+    "/src/img/marker-8e00bd.png"
+  ],
+  "markerIconActive": "/src/img/marker-ff0000.png",
   "googleStreetViewAPIKey": "AIzaSyABn-5EYFeFx05Yj61OqhTn236CvI_3sHk",
   "imageSize": {
     "width": 400,

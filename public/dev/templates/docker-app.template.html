@@ -1,10 +1,10 @@
 <div class="b-wrap">
     <div id="map"></div>
-    <div class="b-popup" [ngClass]="{'m-popup_hide': checkedDockerId < 0}">
+    <div class="b-popup" [ngClass]="{'m-popup_hide': checkedDockerId == null}">
         <div class="b-popup__inner">
             <h5>Image</h5><br>
             <img class="j-street-view" [src]="googleStreetViewSrcs['item' + checkedDockerId]" /><br>
-            <ul *ngIf="checkedDockerId >= 0">
+            <ul *ngIf="checkedDockerId != null">
                 <li>dockerId: {{dockers['item' + checkedDockerId].clientId}}</li>
                 <li>dockerType: {{dockers['item' + checkedDockerId].dockerType}}</li>
                 <li>Ip: {{dockers['item' + checkedDockerId].ip}}</li>
@@ -15,7 +15,7 @@
     <div class="b-infowindow" *ngIf="providerKeys.length">
         <h2>Providers:</h2>
         <ul>
-            <li *ngFor="#key of providerKeys">{{key + ': ' + providers[key]}}</li>
+            <li *ngFor="#key of providerKeys">{{key + ': ' + providers[key].num}}</li>
         </ul>
     </div>
 </div>
