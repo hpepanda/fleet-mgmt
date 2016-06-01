@@ -152,7 +152,7 @@ GoogleRouteSimulator.prototype.updatePosition = function(){
             if (this.previousPosition != null) {
                 position.bearing = calculateBearing(this.previousPosition.latitude, this.previousPosition.longitude, position.latitude, position.longitude);
                 this.positionCallback(this.previousPosition);
-                this.positionCallback(position);
+                this.positionCallback = position;
             } else {
                 this.previousPosition = position;
             }
