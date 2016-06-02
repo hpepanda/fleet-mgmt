@@ -133,10 +133,7 @@ GoogleRouteSimulator.prototype.updatePosition = function(){
 
             if (this.previousPosition != null) {
                 this.previousPosition.bearing = calculateBearing(this.previousPosition.latitude, this.previousPosition.longitude, position.latitude, position.longitude);
-                
-                if (positionCallback) {
-                    this.positionCallback(this.previousPosition);
-                }
+                this.positionCallback(this.previousPosition);
                 this.previousPosition = position;
             } else {
                 this.previousPosition = position;
@@ -154,9 +151,7 @@ GoogleRouteSimulator.prototype.updatePosition = function(){
 
             if (this.previousPosition != null) {
                 position.bearing = calculateBearing(this.previousPosition.latitude, this.previousPosition.longitude, position.latitude, position.longitude);
-                if(positionCallback) {
-                    this.positionCallback(this.previousPosition);
-                }
+                this.positionCallback(this.previousPosition);
 
                 this.previousPosition = position;
             } else {
