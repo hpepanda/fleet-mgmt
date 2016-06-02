@@ -57,7 +57,8 @@ export class DockerAppComponent {
                     if (!this.providers[item.data[0].metadata.dockerType]) {
                         this.providers[item.data[0].metadata.dockerType] = {
                             num: 0,
-                            icon: this.config.markerIcons.shift()
+                            icon: this.config.markerIcons.shift(),
+                            color: this.config.baseColors.shift()
                         };
                         this.providerKeys = Object.keys(this.providers);
                     }
@@ -125,6 +126,10 @@ export class DockerAppComponent {
                             this.markerActive = null;
                         }
                         this.providers[this.dockers[dockerKey].dockerType].num--;
+                        if (!this.providers[this.dockers[dockerKey].dockerType].num) {
+                            delete this.providers[this.dockers[dockerKey].dockerType];
+                            this.providerKeys = Object.keys(this.providers);
+                        }
                         delete this.dockers[dockerKey];
                         this.markers[dockerKey].setMap(null);
                         delete this.markers[dockerKey];

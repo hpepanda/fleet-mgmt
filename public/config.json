@@ -42,7 +42,14 @@
     "/src/img/marker-00d8ff.png",
     "/src/img/marker-fbe72c.png",
     "/src/img/marker-fb532c.png",
-    "/src/img/marker-fb2cf4.png"
+    "/src/img/marker-0057f4.png"
+  ],
+  "baseColors": [
+    "00b287",
+    "00d8ff",
+    "fbe72c",
+    "fb532c",
+    "0057f4"
   ],
   "markerIconActive": "/src/img/marker-ff0000.png",
   "googleStreetViewAPIKey": "AIzaSyABn-5EYFeFx05Yj61OqhTn236CvI_3sHk",

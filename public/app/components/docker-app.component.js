@@ -60,7 +60,8 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                                 if (!_this.providers[item.data[0].metadata.dockerType]) {
                                     _this.providers[item.data[0].metadata.dockerType] = {
                                         num: 0,
-                                        icon: _this.config.markerIcons.shift()
+                                        icon: _this.config.markerIcons.shift(),
+                                        color: _this.config.baseColors.shift()
                                     };
                                     _this.providerKeys = Object.keys(_this.providers);
                                 }
@@ -119,6 +120,10 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                                         _this.markerActive = null;
                                     }
                                     _this.providers[_this.dockers[dockerKey].dockerType].num--;
+                                    if (!_this.providers[_this.dockers[dockerKey].dockerType].num) {
+                                        delete _this.providers[_this.dockers[dockerKey].dockerType];
+                                        _this.providerKeys = Object.keys(_this.providers);
+                                    }
                                     delete _this.dockers[dockerKey];
                                     _this.markers[dockerKey].setMap(null);
                                     delete _this.markers[dockerKey];
