@@ -1,21 +1,26 @@
 <div class="b-wrap">
     <div id="map"></div>
     <div class="b-popup" [ngClass]="{'m-popup_hide': checkedDockerId == null}">
-        <div class="b-popup__inner">
-            <h5>Image</h5><br>
-            <img class="j-street-view" [src]="googleStreetViewSrcs['item' + checkedDockerId]" /><br>
-            <ul *ngIf="checkedDockerId != null">
-                <li>dockerId: {{dockers['item' + checkedDockerId].clientId}}</li>
-                <li>dockerType: {{dockers['item' + checkedDockerId].dockerType}}</li>
-                <li>Ip: {{dockers['item' + checkedDockerId].ip}}</li>
-            </ul>
+        <div class="b-popup__header">
+            <div class="b-popup__close" (click)="closePopup()"></div>
         </div>
-        <div class="b-popup__close" (click)="closePopup()"></div>
+        <div class="b-popup__inner">
+            <div class="b-popup__content">
+                <div class="b-popup-title">Image:</div>
+                <img class="j-street-view" [src]="googleStreetViewSrcs['item' + checkedDockerId]" />
+                <div class="b-popup-title m-popup-title_information">Information:</div>
+                <ul class="b-params-list" *ngIf="checkedDockerId != null">
+                    <li class="b-params-list__item">dockerId: <span class="b-params-list__value">{{dockers['item' + checkedDockerId].clientId}}</span></li>
+                    <li class="b-params-list__item">dockerType: <span class="b-params-list__value">{{dockers['item' + checkedDockerId].dockerType}}</span></li>
+                    <li class="b-params-list__item">Ip: <span class="b-params-list__value">{{dockers['item' + checkedDockerId].ip}}</span></li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="b-infowindow" *ngIf="providerKeys.length">
-        <h2>Providers:</h2>
-        <ul>
-            <li *ngFor="#key of providerKeys">{{key + ': ' + providers[key].num}}</li>
+        <h3 class="b-infowindow__title">Providers:</h3>
+        <ul class="b-providers-list">
+            <li class="b-providers-list__item" *ngFor="#key of providerKeys">{{key}}: <span class="b-providers-list__value">{{providers[key].num}}</span></li>
         </ul>
     </div>
 </div>

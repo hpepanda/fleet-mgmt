@@ -64,7 +64,9 @@ export class DockerAppComponent {
                     this.providers[item.data[0].metadata.dockerType].num++;
 
                     var icon = {
-                        url: this.providers[item.data[0].metadata.dockerType].icon
+                        url: this.providers[item.data[0].metadata.dockerType].icon,
+                        scaledSize: new google.maps.Size(this.config.marker.scaledSize.width, this.config.marker.scaledSize.height),
+                        anchor: new google.maps.Point(this.config.marker.anchor.offsetX, this.config.marker.anchor.offsetY)
                     };
 
                     this.markers['item' + item.clientId] = new google.maps.Marker({
@@ -76,7 +78,9 @@ export class DockerAppComponent {
                     this.markers['item' + item.clientId].addListener('click', () => {
                         if (this.markerActive != null) {
                             var icon = {
-                                url: this.providers[this.dockers['item' + this.markerActive].dockerType].icon
+                                url: this.providers[this.dockers['item' + this.markerActive].dockerType].icon,
+                                scaledSize: new google.maps.Size(this.config.marker.scaledSize.width, this.config.marker.scaledSize.height),
+                                anchor: new google.maps.Point(this.config.marker.anchor.offsetX, this.config.marker.anchor.offsetY)
                             };
                             this.markers['item' + this.markerActive].setIcon(icon);
                         }
@@ -84,7 +88,9 @@ export class DockerAppComponent {
                         this.checkedDockerId = item.clientId;
                         this.markerActive = item.clientId;
                         var icon = {
-                            url: this.config.markerIconActive
+                            url: this.config.markerIconActive,
+                            scaledSize: new google.maps.Size(this.config.markerActive.scaledSize.width, this.config.markerActive.scaledSize.height),
+                            anchor: new google.maps.Point(this.config.markerActive.anchor.offsetX, this.config.markerActive.anchor.offsetY)
                         };
                         this.markers['item' + item.clientId].setIcon(icon);
                     });
@@ -144,6 +150,15 @@ export class DockerAppComponent {
 
     closePopup(): void {
         this.checkedDockerId = null;
+        if (this.markerActive != null) {
+            var icon = {
+                url: this.providers[this.dockers['item' + this.markerActive].dockerType].icon,
+                scaledSize: new google.maps.Size(this.config.marker.scaledSize.width, this.config.marker.scaledSize.height),
+                anchor: new google.maps.Point(this.config.marker.anchor.offsetX, this.config.marker.anchor.offsetY)
+            };
+            this.markers['item' + this.markerActive].setIcon(icon);
+        }
+        this.markerActive = null;
     }
 
     updateDockerKeys(): void {

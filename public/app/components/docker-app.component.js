@@ -66,7 +66,9 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                                 }
                                 _this.providers[item.data[0].metadata.dockerType].num++;
                                 var icon = {
-                                    url: _this.providers[item.data[0].metadata.dockerType].icon
+                                    url: _this.providers[item.data[0].metadata.dockerType].icon,
+                                    scaledSize: new google.maps.Size(_this.config.marker.scaledSize.width, _this.config.marker.scaledSize.height),
+                                    anchor: new google.maps.Point(_this.config.marker.anchor.offsetX, _this.config.marker.anchor.offsetY)
                                 };
                                 _this.markers['item' + item.clientId] = new google.maps.Marker({
                                     position: new google.maps.LatLng(item.data[0].position.latitude, item.data[0].position.longitude),
@@ -76,14 +78,18 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                                 _this.markers['item' + item.clientId].addListener('click', function () {
                                     if (_this.markerActive != null) {
                                         var icon = {
-                                            url: _this.providers[_this.dockers['item' + _this.markerActive].dockerType].icon
+                                            url: _this.providers[_this.dockers['item' + _this.markerActive].dockerType].icon,
+                                            scaledSize: new google.maps.Size(_this.config.marker.scaledSize.width, _this.config.marker.scaledSize.height),
+                                            anchor: new google.maps.Point(_this.config.marker.anchor.offsetX, _this.config.marker.anchor.offsetY)
                                         };
                                         _this.markers['item' + _this.markerActive].setIcon(icon);
                                     }
                                     _this.checkedDockerId = item.clientId;
                                     _this.markerActive = item.clientId;
                                     var icon = {
-                                        url: _this.config.markerIconActive
+                                        url: _this.config.markerIconActive,
+                                        scaledSize: new google.maps.Size(_this.config.markerActive.scaledSize.width, _this.config.markerActive.scaledSize.height),
+                                        anchor: new google.maps.Point(_this.config.markerActive.anchor.offsetX, _this.config.markerActive.anchor.offsetY)
                                     };
                                     _this.markers['item' + item.clientId].setIcon(icon);
                                 });
@@ -133,6 +139,15 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                 };
                 DockerAppComponent.prototype.closePopup = function () {
                     this.checkedDockerId = null;
+                    if (this.markerActive != null) {
+                        var icon = {
+                            url: this.providers[this.dockers['item' + this.markerActive].dockerType].icon,
+                            scaledSize: new google.maps.Size(this.config.marker.scaledSize.width, this.config.marker.scaledSize.height),
+                            anchor: new google.maps.Point(this.config.marker.anchor.offsetX, this.config.marker.anchor.offsetY)
+                        };
+                        this.markers['item' + this.markerActive].setIcon(icon);
+                    }
+                    this.markerActive = null;
                 };
                 DockerAppComponent.prototype.updateDockerKeys = function () {
                     this.dockerKeys = Object.keys(this.dockers);

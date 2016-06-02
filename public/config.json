@@ -7,12 +7,22 @@
   "mapDivElId": "map",
   "marker": {
     "scaledSize": {
-      "width": 50,
-      "height": 50
+      "width": 40,
+      "height": 40
     },
     "anchor": {
-      "offsetX": 25,
-      "offsetY": 25
+      "offsetX": 20,
+      "offsetY": 20
+    }
+  },
+  "markerActive": {
+    "scaledSize": {
+      "width": 53,
+      "height": 53
+    },
+    "anchor": {
+      "offsetX": 26,
+      "offsetY": 26
     }
   },
   "connections": {
@@ -28,11 +38,11 @@
   },
   "stepsPerSegment": 100,
   "markerIcons": [
+    "/src/img/marker-00b287.png",
     "/src/img/marker-00d8ff.png",
     "/src/img/marker-fbe72c.png",
-    "/src/img/marker-00d628.png",
-    "/src/img/marker-bd7400.png",
-    "/src/img/marker-8e00bd.png"
+    "/src/img/marker-fb532c.png",
+    "/src/img/marker-fb2cf4.png"
   ],
   "markerIconActive": "/src/img/marker-ff0000.png",
   "googleStreetViewAPIKey": "AIzaSyABn-5EYFeFx05Yj61OqhTn236CvI_3sHk",
