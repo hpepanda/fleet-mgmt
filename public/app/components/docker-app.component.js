@@ -68,8 +68,8 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                                 _this.providers[item.data[0].metadata.dockerType].num++;
                                 var icon = {
                                     url: _this.providers[item.data[0].metadata.dockerType].icon,
-                                    scaledSize: new google.maps.Size(_this.config.marker.scaledSize.width, _this.config.marker.scaledSize.height),
-                                    anchor: new google.maps.Point(_this.config.marker.anchor.offsetX, _this.config.marker.anchor.offsetY)
+                                    scaledSize: _this.config.enableWideMarkers ? new google.maps.Size(_this.config.markerActive.scaledSize.width, _this.config.markerActive.scaledSize.height) : new google.maps.Size(_this.config.marker.scaledSize.width, _this.config.marker.scaledSize.height),
+                                    anchor: _this.config.enableWideMarkers ? new google.maps.Point(_this.config.markerActive.anchor.offsetX, _this.config.markerActive.anchor.offsetY) : new google.maps.Point(_this.config.marker.anchor.offsetX, _this.config.marker.anchor.offsetY)
                                 };
                                 _this.markers['item' + item.clientId] = new google.maps.Marker({
                                     position: new google.maps.LatLng(item.data[0].position.latitude, item.data[0].position.longitude),
@@ -80,8 +80,8 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                                     if (_this.markerActive != null) {
                                         var icon = {
                                             url: _this.providers[_this.dockers['item' + _this.markerActive].dockerType].icon,
-                                            scaledSize: new google.maps.Size(_this.config.marker.scaledSize.width, _this.config.marker.scaledSize.height),
-                                            anchor: new google.maps.Point(_this.config.marker.anchor.offsetX, _this.config.marker.anchor.offsetY)
+                                            scaledSize: _this.config.enableWideMarkers ? new google.maps.Size(_this.config.markerActive.scaledSize.width, _this.config.markerActive.scaledSize.height) : new google.maps.Size(_this.config.marker.scaledSize.width, _this.config.marker.scaledSize.height),
+                                            anchor: _this.config.enableWideMarkers ? new google.maps.Point(_this.config.markerActive.anchor.offsetX, _this.config.markerActive.anchor.offsetY) : new google.maps.Point(_this.config.marker.anchor.offsetX, _this.config.marker.anchor.offsetY)
                                         };
                                         _this.markers['item' + _this.markerActive].setIcon(icon);
                                     }
@@ -147,8 +147,8 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                     if (this.markerActive != null) {
                         var icon = {
                             url: this.providers[this.dockers['item' + this.markerActive].dockerType].icon,
-                            scaledSize: new google.maps.Size(this.config.marker.scaledSize.width, this.config.marker.scaledSize.height),
-                            anchor: new google.maps.Point(this.config.marker.anchor.offsetX, this.config.marker.anchor.offsetY)
+                            scaledSize: this.config.enableWideMarkers ? new google.maps.Size(this.config.markerActive.scaledSize.width, this.config.markerActive.scaledSize.height) : new google.maps.Size(this.config.marker.scaledSize.width, this.config.marker.scaledSize.height),
+                            anchor: this.config.enableWideMarkers ? new google.maps.Point(this.config.markerActive.anchor.offsetX, this.config.markerActive.anchor.offsetY) : new google.maps.Point(this.config.marker.anchor.offsetX, this.config.marker.anchor.offsetY)
                         };
                         this.markers['item' + this.markerActive].setIcon(icon);
                     }

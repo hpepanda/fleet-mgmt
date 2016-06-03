@@ -1,7 +1,7 @@
 {
   "mapCenter": {
-    "lat": 30.26464873118515,
-    "lng": -97.74062991142273
+    "lat": 36.1696387,
+    "lng": -115.2889105
   },
   "mapZoom": 12,
   "mapDivElId": "map",
@@ -39,22 +39,23 @@
   "stepsPerSegment": 100,
   "markerIcons": [
     "/src/img/marker-00b287.png",
-    "/src/img/marker-00d8ff.png",
-    "/src/img/marker-fbe72c.png",
-    "/src/img/marker-fb532c.png",
-    "/src/img/marker-0057f4.png"
+    "/src/img/marker-3333cc.png",
+    "/src/img/marker-2ad2c9.png",
+    "/src/img/marker-ff8d6d.png",
+    "/src/img/marker-614767.png"
   ],
   "baseColors": [
     "00b287",
-    "00d8ff",
-    "fbe72c",
-    "fb532c",
-    "0057f4"
+    "3333cc",
+    "2ad2c9",
+    "ff8d6d",
+    "614767"
   ],
   "markerIconActive": "/src/img/marker-ff0000.png",
   "googleStreetViewAPIKey": "AIzaSyABn-5EYFeFx05Yj61OqhTn236CvI_3sHk",
   "imageSize": {
     "width": 400,
     "height": 200
-  }
+  },
+  "enableWideMarkers": false
 }

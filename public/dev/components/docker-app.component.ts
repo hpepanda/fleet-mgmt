@@ -66,8 +66,8 @@ export class DockerAppComponent {
 
                     var icon = {
                         url: this.providers[item.data[0].metadata.dockerType].icon,
-                        scaledSize: new google.maps.Size(this.config.marker.scaledSize.width, this.config.marker.scaledSize.height),
-                        anchor: new google.maps.Point(this.config.marker.anchor.offsetX, this.config.marker.anchor.offsetY)
+                        scaledSize: this.config.enableWideMarkers ? new google.maps.Size(this.config.markerActive.scaledSize.width, this.config.markerActive.scaledSize.height) : new google.maps.Size(this.config.marker.scaledSize.width, this.config.marker.scaledSize.height),
+                        anchor: this.config.enableWideMarkers ? new google.maps.Point(this.config.markerActive.anchor.offsetX, this.config.markerActive.anchor.offsetY) : new google.maps.Point(this.config.marker.anchor.offsetX, this.config.marker.anchor.offsetY)
                     };
 
                     this.markers['item' + item.clientId] = new google.maps.Marker({
@@ -80,8 +80,8 @@ export class DockerAppComponent {
                         if (this.markerActive != null) {
                             var icon = {
                                 url: this.providers[this.dockers['item' + this.markerActive].dockerType].icon,
-                                scaledSize: new google.maps.Size(this.config.marker.scaledSize.width, this.config.marker.scaledSize.height),
-                                anchor: new google.maps.Point(this.config.marker.anchor.offsetX, this.config.marker.anchor.offsetY)
+                                scaledSize: this.config.enableWideMarkers ? new google.maps.Size(this.config.markerActive.scaledSize.width, this.config.markerActive.scaledSize.height) : new google.maps.Size(this.config.marker.scaledSize.width, this.config.marker.scaledSize.height),
+                                anchor: this.config.enableWideMarkers ? new google.maps.Point(this.config.markerActive.anchor.offsetX, this.config.markerActive.anchor.offsetY) : new google.maps.Point(this.config.marker.anchor.offsetX, this.config.marker.anchor.offsetY)
                             };
                             this.markers['item' + this.markerActive].setIcon(icon);
                         }
@@ -158,8 +158,8 @@ export class DockerAppComponent {
         if (this.markerActive != null) {
             var icon = {
                 url: this.providers[this.dockers['item' + this.markerActive].dockerType].icon,
-                scaledSize: new google.maps.Size(this.config.marker.scaledSize.width, this.config.marker.scaledSize.height),
-                anchor: new google.maps.Point(this.config.marker.anchor.offsetX, this.config.marker.anchor.offsetY)
+                scaledSize: this.config.enableWideMarkers ? new google.maps.Size(this.config.markerActive.scaledSize.width, this.config.markerActive.scaledSize.height) : new google.maps.Size(this.config.marker.scaledSize.width, this.config.marker.scaledSize.height),
+                anchor: this.config.enableWideMarkers ? new google.maps.Point(this.config.markerActive.anchor.offsetX, this.config.markerActive.anchor.offsetY) : new google.maps.Point(this.config.marker.anchor.offsetX, this.config.marker.anchor.offsetY)
             };
             this.markers['item' + this.markerActive].setIcon(icon);
         }

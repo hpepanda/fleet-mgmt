@@ -1,7 +1,15 @@
 <div class="b-wrap">
+    <header class="b-header">
+        <img src="../../src/img/hp-logo.png" alt="" />
+        <div class="b-header__title">
+            <span class="b-header__main">helion cloud suite</span><br>
+            <span class="b-header__sub">powering Fleet Management</span>
+        </div>
+    </header>
     <div id="map"></div>
     <div class="b-popup" [ngClass]="{'m-popup_hide': checkedDockerId == null}">
         <div class="b-popup__header">
+            <span class="b-popup__title">Container Telemetry</span>
             <div class="b-popup__close" (click)="closePopup()"></div>
         </div>
         <div class="b-popup__inner">
@@ -18,7 +26,7 @@
         </div>
     </div>
     <div class="b-infowindow" *ngIf="providerKeys.length">
-        <h3 class="b-infowindow__title">Providers:</h3>
+        <h3 class="b-infowindow__title">Telemetry Providers:</h3>
         <ul class="b-providers-list">
             <li class="b-providers-list__item m-providers-list__item_{{providers[key].color}}" *ngFor="#key of providerKeys">
                 {{key}}: <span class="b-providers-list__value">{{providers[key].num}}</span>
