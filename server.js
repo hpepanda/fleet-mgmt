@@ -11,15 +11,14 @@ var clientId = process.env.DOCKER_ID ||  guidGenerator.generateGUID();
 var ip = process.env.IP || "127.0.0.1";
 var port = process.env.PORT || 7011;
 
-
 var randomLongitude = require('random-longitude');
 var randomLatitude = require('random-latitude');
 
-var topLeftLat = 30.33;
-var topLeftLong = -97.85;
+var topLeftLat = 36.27749304994348;
+var topLeftLong = -115.31936645507812;
 
-var bottomRightLat = 30.16;
-var bottomRightLong = -97.59;
+var bottomRightLat = 36.03688445156563;
+var bottomRightLong = -115.02754211425781;
 
 if(process.env.CONFIGURATION) {
     var configuration = JSON.parse(process.env.CONFIGURATION);
