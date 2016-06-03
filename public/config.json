@@ -57,5 +57,5 @@
     "width": 400,
     "height": 200
   },
-  "enableWideMarkers": false
+  "enableWideMarkers": true
 }
