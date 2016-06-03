@@ -117,6 +117,7 @@ GoogleRouteSimulator.prototype.calculateRoute = function() {
             destination: this.endPoint.lat + "," + this.endPoint.lng,
             mode: 'driving',
             departure_time: makeTrafficModelDate(),
+            avoid: 'highways',
             traffic_model: 'pessimistic'
         }, locationReceived.bind(this));
     }
