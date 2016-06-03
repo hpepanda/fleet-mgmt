@@ -14,7 +14,7 @@ body {
 
 .b-header {
     background: #000;
-    height: 10%;
+    height: 100px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -46,14 +46,14 @@ body {
     position: absolute;
     width: 25%;
     min-width: 480px;
-    top: 10%;
+    top: 100px;
     left: 0;
     bottom: 0;
     box-sizing: border-box;
     transition: margin ease .3s;
 }
 .m-popup_hide {
-    margin-left: -25%;
+    margin-left: -550px;
 }
 .b-popup__header {
     position: relative;
@@ -121,8 +121,14 @@ body {
     display: flex;
     align-items: center;
 }
+.m-params-list__item_margined {
+    margin-top: 30px;
+}
 .b-params-list__value {
     font-weight: 900;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .b-params-list__item:first-child {
     margin-top: 0;

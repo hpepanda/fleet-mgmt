@@ -18,9 +18,9 @@
                 <img class="j-street-view" [src]="googleStreetViewSrcs['item' + checkedDockerId]" />
                 <div class="b-popup-title m-popup-title_information">Information:</div>
                 <ul class="b-params-list" *ngIf="checkedDockerId != null">
-                    <li class="b-params-list__item">dockerId: <span class="b-params-list__value">{{dockers['item' + checkedDockerId].clientId}}</span></li>
-                    <li class="b-params-list__item">dockerType: <span class="b-params-list__value">{{dockers['item' + checkedDockerId].dockerType}}</span></li>
-                    <li class="b-params-list__item">Ip: <span class="b-params-list__value">{{dockers['item' + checkedDockerId].ip}}</span></li>
+                    <li class="b-params-list__item">dockerId:&nbsp;<span class="b-params-list__value">{{dockers['item' + checkedDockerId].clientId}}</span></li>
+                    <li class="b-params-list__item m-params-list__item_margined">dockerType:&nbsp;<span class="b-params-list__value">{{dockers['item' + checkedDockerId].dockerType}}</span></li>
+                    <li class="b-params-list__item">Ip:&nbsp;<span class="b-params-list__value">{{dockers['item' + checkedDockerId].ip}}</span></li>
                 </ul>
             </div>
         </div>

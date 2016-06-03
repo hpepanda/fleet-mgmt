@@ -1,7 +1,7 @@
 {
   "mapCenter": {
-    "lat": 36.1696387,
-    "lng": -115.2889105
+    "lat": 36.1543611,
+    "lng": -115.2079557
   },
   "mapZoom": 12,
   "mapDivElId": "map",
@@ -41,15 +41,16 @@
     "/src/img/marker-00b287.png",
     "/src/img/marker-3333cc.png",
     "/src/img/marker-2ad2c9.png",
-    "/src/img/marker-ff8d6d.png",
-    "/src/img/marker-614767.png"
+    "/src/img/marker-614767.png",
+    "/src/img/marker-ff8d6d.png"
+
   ],
   "baseColors": [
     "00b287",
     "3333cc",
     "2ad2c9",
-    "ff8d6d",
-    "614767"
+    "614767",
+    "ff8d6d"
   ],
   "markerIconActive": "/src/img/marker-ff0000.png",
   "googleStreetViewAPIKey": "AIzaSyABn-5EYFeFx05Yj61OqhTn236CvI_3sHk",

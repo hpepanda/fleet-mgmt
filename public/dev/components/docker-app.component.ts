@@ -127,8 +127,11 @@ export class DockerAppComponent {
                         }
                         this.providers[this.dockers[dockerKey].dockerType].num--;
                         if (!this.providers[this.dockers[dockerKey].dockerType].num) {
+                            this.config.markerIcons.push(this.providers[this.dockers[dockerKey].dockerType].icon);
+                            this.config.baseColors.push(this.providers[this.dockers[dockerKey].dockerType].color);
                             delete this.providers[this.dockers[dockerKey].dockerType];
                             this.providerKeys = Object.keys(this.providers);
+
                         }
                         delete this.dockers[dockerKey];
                         this.markers[dockerKey].setMap(null);

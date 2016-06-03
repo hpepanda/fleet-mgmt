@@ -121,6 +121,8 @@ System.register(['angular2/http', 'angular2/core', '../services/getConfig.servic
                                     }
                                     _this.providers[_this.dockers[dockerKey].dockerType].num--;
                                     if (!_this.providers[_this.dockers[dockerKey].dockerType].num) {
+                                        _this.config.markerIcons.push(_this.providers[_this.dockers[dockerKey].dockerType].icon);
+                                        _this.config.baseColors.push(_this.providers[_this.dockers[dockerKey].dockerType].color);
                                         delete _this.providers[_this.dockers[dockerKey].dockerType];
                                         _this.providerKeys = Object.keys(_this.providers);
                                     }
