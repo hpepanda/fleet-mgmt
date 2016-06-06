@@ -1,5 +1,5 @@
 applications:
-- name: telemetry-ui
+- name: research-telemetry-ui
   mem: 128M
   stackato:
     ignores:
