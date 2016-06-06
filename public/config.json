@@ -39,18 +39,26 @@
   "stepsPerSegment": 100,
   "markerIcons": [
     "/src/img/marker-00b287.png",
-    "/src/img/marker-3333cc.png",
-    "/src/img/marker-2ad2c9.png",
-    "/src/img/marker-614767.png",
-    "/src/img/marker-ff8d6d.png"
+    "/src/img/marker-7845ff.png",
+    "/src/img/marker-0051ff.png",
+    "/src/img/marker-0091f8.png",
+    "/src/img/marker-61a100.png",
+    "/src/img/marker-008c8c.png",
+    "/src/img/marker-ff6430.png",
+    "/src/img/marker-ff3c78.png",
+    "/src/img/marker-00d1ff.png"
 
   ],
   "baseColors": [
     "00b287",
-    "3333cc",
-    "2ad2c9",
-    "614767",
-    "ff8d6d"
+    "7845ff",
+    "0051ff",
+    "0091f8",
+    "61a100",
+    "008c8c",
+    "ff6430",
+    "ff3c78",
+    "00d1ff"
   ],
   "markerIconActive": "/src/img/marker-ff0000.png",
   "googleStreetViewAPIKey": "AIzaSyABn-5EYFeFx05Yj61OqhTn236CvI_3sHk",
