@@ -28,7 +28,7 @@
     <div class="b-infowindow" *ngIf="providerKeys.length">
         <h3 class="b-infowindow__title">Telemetry Providers:</h3>
         <ul class="b-providers-list">
-            <li class="b-providers-list__item m-providers-list__item_{{providers[key].color}}" *ngFor="#key of providerKeys">
+            <li class="b-providers-list__item m-providers-list__item_{{providers[key].color}}" [style.background-color]="providers[key].color" *ngFor="#key of providerKeys">
                 {{key}}: <span class="b-providers-list__value">{{providers[key].num}}</span>
             </li>
         </ul>

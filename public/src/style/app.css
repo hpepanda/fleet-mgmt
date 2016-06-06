@@ -9,7 +9,7 @@ body {
     font-weight: 400;
 }
 #map {
-    height: 90%;
+    height: 90.7%;
 }
 
 .b-header {
@@ -365,21 +365,6 @@ body {
     margin-left: 29px;
     font-weight: 500;
 }
-.m-providers-list__item_00b287 {
-    background: #00b287;
-}
-.m-providers-list__item_3333cc {
-    background: #3333cc;
-}
-.m-providers-list__item_2ad2c9 {
-    background: #2ad2c9;
-}
-.m-providers-list__item_ff8d6d {
-    background: #ff8d6d;
-}
-.m-providers-list__item_614767 {
-    background: #614767;
-}
 .b-providers-list__value {
     font-weight: 900;
 }
@@ -394,15 +379,27 @@ body {
 .m-providers-list__item_00b287:before {
     background: url('../img/providers-list-bg-00b287.png') no-repeat;
 }
-.m-providers-list__item_3333cc:before {
-    background: url('../img/providers-list-bg-3333cc.png') no-repeat;
+.m-providers-list__item_7845ff:before {
+    background: url('../img/providers-list-bg-7845ff.png') no-repeat;
 }
-.m-providers-list__item_2ad2c9:before {
-    background: url('../img/providers-list-bg-2ad2c9.png') no-repeat;
+.m-providers-list__item_0051ff:before {
+    background: url('../img/providers-list-bg-0051ff.png') no-repeat;
 }
-.m-providers-list__item_ff8d6d:before {
-    background: url('../img/providers-list-bg-ff8d6d.png') no-repeat;
+.m-providers-list__item_0091f8:before {
+    background: url('../img/providers-list-bg-0091f8.png') no-repeat;
 }
-.m-providers-list__item_614767:before {
-    background: url('../img/providers-list-bg-614767.png') no-repeat;
+.m-providers-list__item_61a100:before {
+    background: url('../img/providers-list-bg-61a100.png') no-repeat;
+}
+.m-providers-list__item_008c8c:before {
+    background: url('../img/providers-list-bg-008c8c.png') no-repeat;
+}
+.m-providers-list__item_ff6430:before {
+    background: url('../img/providers-list-bg-ff6430.png') no-repeat;
+}
+.m-providers-list__item_ff3c78:before {
+    background: url('../img/providers-list-bg-ff3c78.png') no-repeat;
+}
+.m-providers-list__item_00d1ff:before {
+    background: url('../img/providers-list-bg-00d1ff.png') no-repeat;
 }
