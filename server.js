@@ -25,8 +25,8 @@ if(process.env.CONFIGURATION) {
     binaryDataServer = configuration.BINARY_DATA_SERVER;
     dockerType = configuration.DOCKER_TYPE;
     clientId = configuration.DOCKER_ID;
-    ip = process.env.INSTANCE_IP || configuration.IP;
-    port = process.env.INSTANCE_PORT || configuration.PORT || port;
+    ip = configuration.INSTANCE_IP || configuration.IP;
+    port = configuration.INSTANCE_PORT || configuration.PORT || port;
 
     topLeftLat = configuration.GPS[0];
     topLeftLong = configuration.GPS[1];
@@ -34,7 +34,7 @@ if(process.env.CONFIGURATION) {
     bottomRightLong = configuration.GPS[3];
 }
 
-if(process.env.APPLY_CF_ENV = true) {
+if(process.env.APPLY_CF_ENV == "true") {
     clientId = process.env.CF_INSTANCE_INDEX || clientId;
     var ip_add = process.env.CF_INSTANCE_ADDR || ip;
     var n = ip_add.indexOf(':');
