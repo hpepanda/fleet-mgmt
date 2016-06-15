@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 
-var appDev = 'public/dev/';
-var appProd = 'public/app/';
+var appDev = 'dev/';
+var appProd = 'app/';
 
 
 /* JS & TS */
