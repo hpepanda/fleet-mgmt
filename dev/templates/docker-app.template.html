@@ -15,7 +15,7 @@
         <div class="b-popup__inner">
             <div class="b-popup__content">
                 <div class="b-popup-title">Image:</div>
-                <img class="j-street-view" [src]="googleStreetViewSrcs['item' + checkedDockerId]" />
+                <img *ngIf="googleStreetViewSrcs['item' + checkedDockerId]" class="j-street-view" [src]="googleStreetViewSrcs['item' + checkedDockerId]" />
                 <div class="b-popup-title m-popup-title_information">Information:</div>
                 <ul class="b-params-list" *ngIf="checkedDockerId != null">
                     <li class="b-params-list__item">dockerId:&nbsp;<span class="b-params-list__value">{{dockers['item' + checkedDockerId].clientId}}</span></li>
