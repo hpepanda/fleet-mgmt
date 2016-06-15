@@ -8,8 +8,8 @@ var clientType = "DOCKER";
 var binaryDataServer = process.env.BINARY_DATA_SERVER || "http://research-binary-data-server.52.35.15.130.nip.io/telemetry";
 var dockerType = process.env.DOCKER_TYPE || "local";
 var clientId = process.env.DOCKER_ID ||  guidGenerator.generateGUID();
-var ip = process.env.IP || "127.0.0.1";
-var port = process.env.PORT || 7011;
+var ip = process.env.INSTANCE_IP || process.env.IP || "127.0.0.1";
+var port = process.env.INSTANCE_PORT || process.env.PORT || 7011;
 
 var randomLongitude = require('random-longitude');
 var randomLatitude = require('random-latitude');
@@ -25,8 +25,8 @@ if(process.env.CONFIGURATION) {
     binaryDataServer = configuration.BINARY_DATA_SERVER;
     dockerType = configuration.DOCKER_TYPE;
     clientId = configuration.DOCKER_ID;
-    ip = configuration.IP;
-    port = configuration.PORT || port;
+    ip = process.env.INSTANCE_IP || configuration.IP;
+    port = process.env.INSTANCE_PORT || configuration.PORT || port;
 
     topLeftLat = configuration.GPS[0];
     topLeftLong = configuration.GPS[1];
@@ -36,7 +36,9 @@ if(process.env.CONFIGURATION) {
 
 if(process.env.APPLY_CF_ENV = true) {
     clientId = process.env.CF_INSTANCE_INDEX || clientId;
-    ip = process.env.CF_INSTANCE_ADDR || ip;
+    var ip_add = process.env.CF_INSTANCE_ADDR || ip;
+    var n = ip_add.indexOf(':');
+    ip = ip_add.substring(0, n != -1 ? n : ip_add.length);
 }
 
 var startPosition = {
@@ -55,7 +57,8 @@ console.log(JSON.stringify({
     endPosition: endPosition,
     dockerType: dockerType,
     clientId: clientId,
-    ip: ip
+    instanceIp: ip,
+    instancePort: port
 }));
 
 
@@ -70,9 +73,10 @@ var positionCallback = function(position) {
                 data: [{
                     position: position,
                     metadata: {
-                        ip: ip,
                         dockerType: dockerType,
-                        dockerId: clientId
+                        dockerId: clientId,
+                        instanceIp: ip,
+                        instancePort: port
                     }
                 }]
             }
@@ -97,7 +101,8 @@ app.get('/', function(req, res){
         position: routeSimulator.getPosition(),
         dockerType: dockerType,
         clientId: clientId,
-        ip: ip,
+        instanceIp: ip,
+        instancePort: port,
         time: new Date()
     }));
 });
