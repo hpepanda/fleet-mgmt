@@ -14,11 +14,11 @@ var port = process.env.INSTANCE_PORT || process.env.PORT || 7011;
 var randomLongitude = require('random-longitude');
 var randomLatitude = require('random-latitude');
 
-var topLeftLat = 36.27749304994348;
-var topLeftLong = -115.31936645507812;
+var topLeftLat = 47.686270;
+var topLeftLong = -122.407585;
 
-var bottomRightLat = 36.03688445156563;
-var bottomRightLong = -115.02754211425781;
+var bottomRightLat = 47.532118;
+var bottomRightLong = -122.109359;
 
 if(process.env.CONFIGURATION) {
     var configuration = JSON.parse(process.env.CONFIGURATION);
