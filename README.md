@@ -1,3 +1,31 @@
+# Fleet Management System
+The Fleet Management System it is a navigation software which displays moving of the vehicles on the map in the real time. The main goal of the system is not track vehicles, but to demonstrate advantages that provides by Stackato platform for easy scaling of any types of applications in real time. Because the Stackato platform allows us to increase/decrease instances of the applications by simply changing the settings in the GUI of the administration panel.
+
+![Fleet Management UI](https://cloud.githubusercontent.com/assets/20835203/17626514/357df7a6-60b6-11e6-9acd-86f15dd163cd.png)
+
+
+The software needed for work of the system can be found in this repository. All parts of the system are distributed through the different branches, so, for installing a specific application in generally you need to:
++ Clone the current repository to your PC:
+
+    ```
+    git clone https://github.com/hpepanda/fleet-mgmt.git && cd fleet-mgmt
+    ```
++ Switch from master to the other branch depending what application you need:
+
+    ```
+    git checkout <server_name>
+    ```
+
+For your convenience, all the software which can be found in the current repository listed in the table below:
+
+Server Name|Branch Name|Description
+-----------|-----------|-----------
+Binary Data Server|binary-server|
+Sensors Data Server|data-server|
+User Interface|gps-simulator|
+GPS Simulator|ui|
+
+###OLD:
 ##Binary data server
 Branch name: binary-server
  
