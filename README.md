@@ -1,16 +1,23 @@
 # Fleet Management System
-The Fleet Management System it is a navigation software which displays moving of the vehicles on the map in the real time. The main goal of the system is not track vehicles, but to demonstrate advantages that provides by Stackato platform for easy scaling of any types of applications in real time. Because the Stackato platform allows us to increase/decrease instances of the applications by simply changing the settings in the GUI of the administration panel.
+The Fleet Management System it is a navigation software which displays moving of the vehicles on the map in the real time. The main goal of the system is not track vehicles, but to demonstrate advantages that provides the Stackato platform for easy scaling of any types of applications in real time. Because the Stackato platform allows us to increase/decrease instances of the applications by simply changing the settings in the GUI of the administration panel.
 
-![Fleet Management UI](https://cloud.githubusercontent.com/assets/20835203/17626514/357df7a6-60b6-11e6-9acd-86f15dd163cd.png)
+![Fleet Management UI]()
 
+## Prerequirements
+Before starting the installation, please check that following additional software installed and configured on your PC:
++ [Git](https://git-scm.com/download/);
++ [Helion Stackato Client](http://downloads.stackato.com/client/) (the executable of which [should be added](https://docs.stackato.com/user/client/) to the PATH system variable).
 
+Also, of cource you should have the account on the Stackato platform if you want deploy the software on it.
+
+## Repository
 The software needed for work of the system can be found in this repository. All parts of the system are distributed through the different branches, so, for installing a specific application in generally you need to:
 + Clone the current repository to your PC:
 
     ```
     git clone https://github.com/hpepanda/fleet-mgmt.git && cd fleet-mgmt
     ```
-+ Switch from master to the other branch depending what application you need:
++ Switch from master to the other branch depending on what application you need:
 
     ```
     git checkout <server_name>
@@ -20,68 +27,7 @@ For your convenience, all the software which can be found in the current reposit
 
 Server Name|Branch Name|Description
 -----------|-----------|-----------
-Binary Data Server|binary-server|
-Sensors Data Server|data-server|
-User Interface|gps-simulator|
-GPS Simulator|ui|
-
-###OLD:
-##Binary data server
-Branch name: binary-server
- 
-Environment variables configuration:
- 
-MONGODB_URL to configure mongodb url
-PORT to configure app port
-USE_ONLY_CACHE=”true” to disable data storing
- 
- 
-##Sensors data server
-Branch name: data-server
- 
-Environment variables configuration:
-MONGODB_URL to configure mongodb url
-PORT to configure app port
-POINT_TTL to configure ttl (in seconds)
- 
- 
-##GPS simulator
-Branch name: gps-simulator
- 
-Environment variables configuration:
-CONFIGURATION =
-{
-  "BINARY_DATA_SERVER": "http://research-binary-data-server.52.35.15.130.nip.io/telemetry",
-  "DOCKER_TYPE": "stackato_local",
-  "DOCKER_ID": "stackato_122", - unique docker id
-  "INSTANCE_IP": "52.35.15.130", - dynamic value
-  "INSTANCE_PORT": "3322", - dynamic value
-  "GPS": [  - Paris GPS coordinates
-    48.88921361391563,
-    2.3060989379882812,
-    48.82709641375401,
-    2.3850631713867188
-  ]
-}
- 
-APPLY_CF_ENV = “true” – only for stackato
- 
- 
-##DOCKER-UI
-Branch name: ui
-
-Configuration can be found in the: “docker-ui/”
- 
-UI map center configuration
-"mapCenter": {
-    "lat": 48.8575954,
-    "lng": 2.3424055
-  }
- 
-Data source configuration
-"connections": [
-    {
-      "server": "http://research-sensors-data-provider.52.35.15.130.nip.io",
-      "port": 80
-    }
-  ]
+Binary Data Server|binary-server|This component used for recieving events (sent from the "GPS Simulator" or real GPS device) and storing these events into the MongoDB database
+Sensors Data Server|data-server|The application that aggregates data from MongoDB and streams it to the clients, connected throug WebSockets
+User Interface|ui|The component that responsible for representation of data to the end user
+GPS Simulator|gps-simulator|The application that emulates sending of data from GPS to the Binary Data Server. Can be used for testing purposes or if you don't have the real hardware GPS tracker
