@@ -25,7 +25,7 @@ And login to the current cloud instance using your username and password;
     ```
 + Wait until you will see the confirmation message "OK <url_address> deployed" in the console:
 
-    ![Result of the Stackato push command]()
+    ![Result of the Stackato push command](https://cloud.githubusercontent.com/assets/20835203/18587187/5a9e8e0e-7c29-11e6-8fe0-dbd592a8545d.png)
 
 + Now, you can use the application with default settings or change these settings by using the following command (you could also use the Stackato admin panel for this purposes):
 
@@ -45,4 +45,4 @@ The URL address of the "Config Server" (if it is a part of the system) and full 
 
 + If the application works fine you should see the following message in your browser’s window when visiting the address \<url_address\>/api:
 
-    ![The application works]()
+    ![The application works](https://cloud.githubusercontent.com/assets/20835203/18587262/bf16c680-7c29-11e6-9442-4ebefbfd2326.png)
