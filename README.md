@@ -45,4 +45,4 @@ The URL address of the "Config Server" (if it is a part of the system) and full 
 
 + If the application works fine you should see the following message in your browser’s window when visiting the address \<url_address\>/api:
 
-    ![The application works](https://cloud.githubusercontent.com/assets/20835203/18587262/bf16c680-7c29-11e6-9442-4ebefbfd2326.png)
+    ![The application works](https://cloud.githubusercontent.com/assets/20835203/18587332/18f03736-7c2a-11e6-9d69-768feeb04419.png)
