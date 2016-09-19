@@ -1,3 +1,4 @@
+# Binary Data Server
 The system component named "Binary Data Server" responsible for processing and saving to DB of data that received from the real GPS devices or from the "GPS Simulator" that emulates its work programmatically. Like any other component of the system it can work locally of course, but for best scaling capabilities it should be deployed on the Stackato platform.
 
 ## Installation:
@@ -32,7 +33,7 @@ And login to the current cloud instance using your username and password;
     ```
     stackato env-add research-binary-data-server <variable_name> <value>
     ```
-Note! All values except the PORT (because it is just a number) should be enclosed in quotes (e.g. "mongodb://localhost:27017/db")
+Note! All values except the PORT (because it is just a number) should be enclosed in quotes (e.g. "mongodb://localhost:27017/db").
 
 All application's settings can be configured through environment variables listed below:
 
