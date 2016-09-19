@@ -1,5 +1,5 @@
 # Fleet Management System
-The Fleet Management System it is a navigation software which displays moving of the vehicles on the map in the real time. The main goal of the system is not track vehicles, but to demonstrate advantages that provides the Stackato platform for easy scaling of any types of applications in real time. Because the Stackato platform allows us to increase/decrease instances of the applications by simply changing the settings in the GUI of the administration panel.
+The Fleet Management System it is a navigation software which displays moving of the vehicles on the map in real time. The main goal of the system is not track vehicles, but to demonstrate advantages that provides the Stackato platform for easy scaling of any types of applications in real time. Because the Stackato platform allows us to increase/decrease instances of the applications by simply changing the settings in the GUI of the administration panel.
 
 ![Fleet Management UI]()
 
