@@ -1,3 +1,4 @@
+# Sensors Data Server
 The main purpose of "Sensors Data Server" is to aggregate the data which stored in the MongoDB database and send them to the clients through WebSockets. Like any other component of the system it can work locally of course, but for best scaling capabilities it should be deployed on the Stackato platform.
 
 ## Installation:
@@ -32,7 +33,7 @@ And login to the current cloud instance using your username and password;
     ```
     stackato env-add research-sensors-data-provider <variable_name> <value>
     ```
-Note! All values except the PORT and POINT_TTL (because they are just a numbers) should be enclosed in quotes (e.g. "mongodb://localhost:27017/db").
+Note! All values except PORT and POINT_TTL (because they are just a numbers) should be enclosed in quotes (e.g. "mongodb://localhost:27017/db").
 
 All application's settings can be configured through environment variables listed below:
 
@@ -43,6 +44,6 @@ Address of the MongoDB server and the name of the database|BINARY_DATABASE or MO
 ?|POINT_TTL|60
 The URL address of the "Config Server" (if it is a part of the system) and full path to the API that responsible for sending of configuration information|CONFIG_SERVER_URI|http://192.168.100.194:8084/api/cfg/
 
-+ If the application works fine you should see the following message in your browser’s window when visiting the address \<url_address\>/api:
++ If the application works fine you should see the following message in your browser’s window when visiting the address which you seen after deployment of the application:
 
     ![The application works](https://cloud.githubusercontent.com/assets/20835203/18587332/18f03736-7c2a-11e6-9d69-768feeb04419.png)
