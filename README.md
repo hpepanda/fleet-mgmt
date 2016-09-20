@@ -24,9 +24,9 @@ And login to the current cloud instance using your username and password;
     ```
     stackato push -n
     ```
-+ Wait until you will see the confirmation message "OK <url_address> deployed" in the console:
++ Wait until you will see the confirmation message "OK \<url_address\> deployed" in the console:
 
-    ![Result of the Stackato push command]()
+    ![Result of the Stackato push command](https://cloud.githubusercontent.com/assets/20835203/18668240/fc7d8836-7f3c-11e6-84cf-30d4b286933a.png)
 
 + Change the application settings using environment variables. They can be set in the Stackato admin panel or by using the following command:
 
@@ -47,8 +47,12 @@ Type of the object|DOCKER_TYPE|local
 
 + You can change the number of the instances of the same type by using the "Instances" control (Applications -> research-gps-simulator -> Instances):
 
-    ![The "Instances" tab in the Stackato adminpanel]()
+    ![The "Instances" tab in the Stackato adminpanel](https://cloud.githubusercontent.com/assets/20835203/18668251/0c28c6ba-7f3d-11e6-80d8-3fd93bec2c3a.png)
 
-+ If the application works fine you should see that new dots (each of which are represent a particular vehicle) will appear on the UI of the "Fleet Management" system (of course "Binary Data Server", "Sensors Data Server" and "Docker UI" should be started):
++ If the application works fine you should see the JSON message with coordinates and other data when visiting the address which you seen after deployment of the application:
+
+    ![JSON message sample](https://cloud.githubusercontent.com/assets/20835203/18668595/ffcbd108-7f3e-11e6-846f-77027d26fe56.png)
+
+    Also, the new dots (each of which are represent a particular vehicle) should appear on the UI of the "Fleet Management" system (of course, all server-side applications should be started):
 
     ![The application works]()
