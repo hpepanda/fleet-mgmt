@@ -24,7 +24,7 @@ And login to the current cloud instance using your username and password;
     ```
     stackato push -n
     ```
-+ Wait until you will see the confirmation message "OK <url_address> deployed" in the console:
++ Wait until you will see the confirmation message "OK \<url_address\> deployed" in the console:
 
     ![Result of the Stackato push command](https://cloud.githubusercontent.com/assets/20835203/18587187/5a9e8e0e-7c29-11e6-8fe0-dbd592a8545d.png)
 
